@@ -15,9 +15,11 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import { Grid } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import TimelineIcon from '@material-ui/icons/Timeline';
+import Link from 'next/link';
 
 const drawerWidth = 240;
 
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
             flexGrow: 1,
             backgroundColor: theme.palette.background.default,
             padding: theme.spacing(3),
+            marginLeft: drawerWidth,
         },
     }),
 );
@@ -94,18 +97,38 @@ export default function MyApp(props: AppProps) {
                     </div>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
+                        <Link href="/">
+                            <ListItem button key="Home">
+                                <ListItemIcon>
+                                    <HomeIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Home" />
                             </ListItem>
-                        ))}
+                        </Link>
+                        <Link href="/stats">
+                            <ListItem button key="Stats">
+                                <ListItemIcon>
+                                    <EqualizerIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Stats" />
+                            </ListItem>
+                        </Link>
+                        <Link href="/revenue">
+                            <ListItem button key="Future Revenue">
+                                <ListItemIcon>
+                                    <TimelineIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Future Revenue" />
+                            </ListItem>
+                        </Link>
                     </List>
                 </Drawer>
 
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Component {...pageProps} />
+                    <Container>
+                        <Component {...pageProps} />
+                    </Container>
                 </main>
             </ThemeProvider>
         </React.Fragment>
