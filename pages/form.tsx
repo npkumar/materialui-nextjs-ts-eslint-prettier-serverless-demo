@@ -27,7 +27,7 @@ export default function Form() {
     return (
         <Box>
             <Typography variant="h4" component="h1" gutterBottom>
-                Home Page
+                Report
             </Typography>
             <form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={2}>

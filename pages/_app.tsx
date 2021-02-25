@@ -17,6 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Badge, Box, Container, IconButton } from '@material-ui/core';
 import Link from 'next/link';
 
@@ -28,6 +29,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { useRouter } from 'next/router';
 
 function Copyright() {
     return (
@@ -38,35 +40,6 @@ function Copyright() {
         </Typography>
     );
 }
-
-export const mainListItems = (
-    <div>
-        <Link href="/">
-            <ListItem button>
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-            </ListItem>
-        </Link>
-        <Link href="/stats">
-            <ListItem button>
-                <ListItemIcon>
-                    <BarChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Stats" />
-            </ListItem>
-        </Link>
-        <Link href="/revenue">
-            <ListItem button>
-                <ListItemIcon>
-                    <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary="Revenue" />
-            </ListItem>
-        </Link>
-    </div>
-);
 
 export const secondaryListItems = (
     <div>
@@ -179,14 +152,16 @@ export default function MyApp(props: AppProps) {
     const { Component, pageProps } = props;
 
     const classes = useStyles();
+    const { pathname } = useRouter();
+
     const [open, setOpen] = React.useState(true);
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     React.useEffect(() => {
         // Remove the server-side injected CSS.
@@ -199,7 +174,7 @@ export default function MyApp(props: AppProps) {
     return (
         <>
             <Head>
-                <title>My page</title>
+                <title>Kakaku</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             </Head>
             <ThemeProvider theme={theme}>
@@ -225,6 +200,9 @@ export default function MyApp(props: AppProps) {
                                     <NotificationsIcon />
                                 </Badge>
                             </IconButton>
+                            <IconButton color="inherit">
+                                <ExitToAppIcon />
+                            </IconButton>
                         </Toolbar>
                     </AppBar>
                     <Drawer
@@ -240,7 +218,32 @@ export default function MyApp(props: AppProps) {
                             </IconButton>
                         </div>
                         <Divider />
-                        <List>{mainListItems}</List>
+                        <List>
+                            <Link href="/">
+                                <ListItem button selected={pathname === '/'}>
+                                    <ListItemIcon>
+                                        <DashboardIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Dashboard" />
+                                </ListItem>
+                            </Link>
+                            <Link href="/stats">
+                                <ListItem button selected={pathname === '/stats'}>
+                                    <ListItemIcon>
+                                        <BarChartIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Stats" />
+                                </ListItem>
+                            </Link>
+                            <Link href="/revenue">
+                                <ListItem button selected={pathname === '/revenue'}>
+                                    <ListItemIcon>
+                                        <LayersIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Revenue" />
+                                </ListItem>
+                            </Link>
+                        </List>
                         <Divider />
                         <List>{secondaryListItems}</List>
                     </Drawer>
