@@ -35,7 +35,7 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link href="/">Kakaku</Link> {new Date().getFullYear()}
+            <Link href="/">Admin</Link> {new Date().getFullYear()}
             {'.'}
         </Typography>
     );
@@ -174,7 +174,7 @@ export default function MyApp(props: AppProps) {
     return (
         <>
             <Head>
-                <title>Kakaku</title>
+                <title>Admin</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             </Head>
             <ThemeProvider theme={theme}>
@@ -193,7 +193,7 @@ export default function MyApp(props: AppProps) {
                                 <MenuIcon />
                             </IconButton>
                             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                                Kakaku
+                                Admin
                             </Typography>
                             <IconButton color="inherit">
                                 <Badge badgeContent={4} color="secondary">

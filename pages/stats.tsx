@@ -7,7 +7,7 @@ export default function Stats() {
     return (
         <Box>
             <Typography variant="h4" component="h1" gutterBottom>
-                Stats Page
+                Stats
             </Typography>
             <Link href="/">Go to the home page</Link>
         </Box>
